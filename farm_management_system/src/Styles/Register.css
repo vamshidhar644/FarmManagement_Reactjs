@@ -1,0 +1,43 @@
+.Registercontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Registercontainer section{
+    padding: 50px;    
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.550em rgba(14, 118, 4, 0.893);
+    padding: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.Registercontainer h3{
+    text-align: center;
+}
+
+.BtnSubmit{
+    width: 100%;
+}
+
+.BtnSubmit:hover{
+    background-color: rgba(14, 118, 4, 0.893);
+}
+
+.bottomLine{
+    padding: 5px;
+    text-align: center;
+}
+.radios{
+    display: flex;
+    gap: 10px;
+}
+
+.bottomLine span{
+    cursor: pointer;
+}
+
+.bottomLine span:hover{
+    color: lightgreen;
+}
