@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../Styles/Register.css';
+import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,23 +18,25 @@ const Register = () => {
     password: '',
     ConfirmPass: '',
   });
-  const getData = (e) => {
-    const { value, name } = e.target;
 
-    setInputValue(() => {
-      return {
-        ...inputVal,
-        [name]: value,
-      };
-    });
+  const { name, username, email, password, ConfirmPass } = inputVal;
+
+  const onInputChange = (e) => {
+    setInputValue({ ...inputVal, [e.target.name]: e.target.value });
+    // console.log(JSON.stringify(inputVal));
   };
 
-  const [data, setData] = useState([]);
+  const [select, setSelection] = useState({
+    option: '',
+  });
+
+  const radioChange = (e) => {
+    setSelection({ ...select, [e.target.name]: e.target.value });
+    // console.log(select);
+  };
 
   const Register = (e) => {
     e.preventDefault();
-
-    const { name, username, email, password, ConfirmPass } = inputVal;
 
     if (name !== '') {
       if (username !== '') {
@@ -42,10 +45,26 @@ const Register = () => {
             if (password !== '') {
               if (password.length >= 6) {
                 if (password === ConfirmPass) {
-                  localStorage.setItem(
-                    'AuthRegister',
-                    JSON.stringify([...data, inputVal])
-                  );
+                  if (select.radio === 'farmer') {
+                    axios({
+                      url: 'http://localhost:3001/FarmerRegistration',
+                      method: 'POST',
+                      data: inputVal,
+                    }).then((response) => {
+                      console.log(response.data.user);
+                    });
+                    // console.log('Farmer is checked');
+                  } else {
+                    axios({
+                      url: 'http://localhost:3001/OwnerRegistration',
+                      method: 'POST',
+                      data: inputVal,
+                    }).then((response) => {
+                      console.log(response.data.user);
+                    });
+                    // console.log('Owner is checked');
+                  }
+
                   alert('Success');
                 } else {
                   alert('Password and Confirm Password are not same');
@@ -77,14 +96,27 @@ const Register = () => {
           <h3>Register</h3>
           <Form>
             <div className="radios">
-              <Form.Check name="radio" type="radio" label="Owner" />
-              <Form.Check name="radio" type="radio" label="Farmer" />
+              <Form.Check
+                name="radio"
+                type="radio"
+                value="owner"
+                label="Owner"
+                defaultChecked={true}
+                onChange={(e) => radioChange(e)}
+              />
+              <Form.Check
+                name="radio"
+                type="radio"
+                value="farmer"
+                label="Farmer"
+                onChange={(e) => radioChange(e)}
+              />
             </div>
             <Form.Group className="mb-3 lg-2" controlId="formBasicFirstname">
               <Form.Control
                 type="text"
                 name="name"
-                onChange={getData}
+                onChange={(e) => onInputChange(e)}
                 placeholder="Name"
               />
             </Form.Group>
@@ -92,7 +124,7 @@ const Register = () => {
               <Form.Control
                 type="text"
                 name="username"
-                onChange={getData}
+                onChange={(e) => onInputChange(e)}
                 placeholder="Username"
               />
             </Form.Group>
@@ -100,15 +132,23 @@ const Register = () => {
               <Form.Control
                 type="email"
                 name="email"
-                onChange={getData}
+                onChange={(e) => onInputChange(e)}
                 placeholder="Enter email"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3 lg-2" controlId="formBasicPhone">
+              <Form.Control
+                type="phone"
+                name="phone"
+                onChange={(e) => onInputChange(e)}
+                placeholder="Phone number"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control
                 type="password"
                 name="password"
-                onChange={getData}
+                onChange={(e) => onInputChange(e)}
                 placeholder="Password"
               />
             </Form.Group>
@@ -116,7 +156,7 @@ const Register = () => {
               <Form.Control
                 type="password"
                 name="ConfirmPass"
-                onChange={getData}
+                onChange={(e) => onInputChange(e)}
                 placeholder="Confirm Password"
               />
             </Form.Group>
