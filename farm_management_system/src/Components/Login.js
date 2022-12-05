@@ -21,6 +21,8 @@ const Login = () => {
     });
   };
 
+  const [LoginStatus, setLoginStatus] = useState(false);
+
   const [select, setSelection] = useState({
     option: '',
   });
@@ -72,8 +74,13 @@ const Login = () => {
       }
       if (status === 1) {
         alert('Login Success');
+        navigate('/farmerHome');
+        // setLoginStatus(true);
+        // console.log(LoginStatus);
       } else {
         alert('Invalid Credentials');
+        // console.log(LoginStatus);
+        // setLoginStatus(false);
       }
     } else {
       const Username = document.getElementById('username').value;
@@ -89,10 +96,14 @@ const Login = () => {
       }
       if (status === 1) {
         alert('Login Success');
+        navigate('/ownerHome');
+        // setLoginStatus(true);
       } else {
         alert('Invalid Credentials');
+        setLoginStatus(false);
       }
     }
+    console.log(LoginStatus);
   };
 
   function ToRegister() {
