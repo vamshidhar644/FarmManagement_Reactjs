@@ -30,8 +30,17 @@ app.post('/OwnerRegistration', (req, res) => {
   const phone = row.phone;
 
   const insertRow =
-    'INSERT INTO owners (Name, Email, Username, Password, Phone) VALUES (' + JSON.stringify(name) + ', ' + JSON.stringify(email) + ', ' +
-    JSON.stringify(username) + ', ' + JSON.stringify(password) + ', ' + JSON.stringify(phone.toString()) + ' )';
+    'INSERT INTO owners (Name, Email, Username, Password, Phone) VALUES (' +
+    JSON.stringify(name) +
+    ', ' +
+    JSON.stringify(email) +
+    ', ' +
+    JSON.stringify(username) +
+    ', ' +
+    JSON.stringify(password) +
+    ', ' +
+    JSON.stringify(phone.toString()) +
+    ' )';
 
   db.query(insertRow, [row], (err, rows) => {
     if (err) throw err;
@@ -47,24 +56,42 @@ app.post('/FarmerRegistration', (req, res) => {
   const phone = row.phone;
 
   const insertRow =
-    'INSERT INTO farmers (Name, Email, Username, Password, Phone) VALUES (' + JSON.stringify(name) + ', ' + JSON.stringify(email) + ', ' +
-    JSON.stringify(username) + ', ' + JSON.stringify(password) + ', ' + JSON.stringify(phone.toString()) + ' )';
+    'INSERT INTO farmers (Name, Email, Username, Password, Phone) VALUES (' +
+    JSON.stringify(name) +
+    ', ' +
+    JSON.stringify(email) +
+    ', ' +
+    JSON.stringify(username) +
+    ', ' +
+    JSON.stringify(password) +
+    ', ' +
+    JSON.stringify(phone.toString()) +
+    ' )';
 
   db.query(insertRow, [row], (err, rows) => {
     if (err) throw err;
   });
 });
 
+app.get('/Farmerlogin', (req, res) => {
+  db.connect(function (err) {
+    if (err) throw err;
+    db.query('SELECT * FROM farmers', function (err, result, fields) {
+      if (err) throw err;
+      res.json({ data: result });
+    });
+  });
+});
 
-// app.get('/login', (req, res) => {
-//   db.connect(function (err) {
-//     if (err) throw err;
-//     db.query('SELECT * FROM registrations', function (err, result, fields) {
-//       if (err) throw err;
-//       res.json({ data: result });
-//     });
-//   });
-// });
+app.get('/Ownerlogin', (req, res) => {
+  db.connect(function (err) {
+    if (err) throw err;
+    db.query('SELECT * FROM owners', function (err, result, fields) {
+      if (err) throw err;
+      res.json({ data: result });
+    });
+  });
+});
 
 app.listen(3001, () => {
   console.log('runnig server on 3001');

@@ -21,11 +21,79 @@ const Login = () => {
     });
   };
 
-  console.log(inputVal);
+  const [select, setSelection] = useState({
+    option: '',
+  });
 
-  function ToSuccessLoginHome() {
-    navigate('/successlogin');
-  }
+  const radioChange = (e) => {
+    setSelection({ ...select, [e.target.name]: e.target.value });
+  };
+
+  const [FarmerData, SetFarmerData] = React.useState(null);
+  React.useEffect(() => {
+    fetch('http://localhost:3001/Farmerlogin/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => SetFarmerData(data.data));
+  }, []);
+
+  const [OwnerData, SetOwnerData] = React.useState(null);
+  React.useEffect(() => {
+    fetch('http://localhost:3001/Ownerlogin/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => SetOwnerData(data.data));
+  }, []);
+
+  const ToSuccessLoginHome = (e) => {
+    e.preventDefault();
+
+    if (select.radio === 'farmer') {
+      const Username = document.getElementById('username').value;
+      const Password = document.getElementById('password').value;
+      var status = 0;
+      for (var index in FarmerData) {
+        if (
+          Username === FarmerData[index]['Username'] &&
+          Password === FarmerData[index]['Password']
+        ) {
+          status++;
+        }
+      }
+      if (status === 1) {
+        alert('Login Success');
+      } else {
+        alert('Invalid Credentials');
+      }
+    } else {
+      const Username = document.getElementById('username').value;
+      const Password = document.getElementById('password').value;
+      var status = 0;
+      for (var index in OwnerData) {
+        if (
+          Username === OwnerData[index]['Username'] &&
+          Password === OwnerData[index]['Password']
+        ) {
+          status++;
+        }
+      }
+      if (status === 1) {
+        alert('Login Success');
+      } else {
+        alert('Invalid Credentials');
+      }
+    }
+  };
 
   function ToRegister() {
     navigate('/register');
@@ -38,22 +106,38 @@ const Login = () => {
           <section>
             <h3>Login</h3>
             <Form>
-            <div className='radios'>
-              <Form.Check name="radio" type="radio" label="Owner" />
-              <Form.Check name="radio" type="radio" label="Farmer" />
-            </div>
-              <Form.Group className="mb-3 lg-2" controlId="formBasicUsername">
+              <div className="radios">
+                <Form.Check
+                  name="radio"
+                  type="radio"
+                  value="owner"
+                  label="Owner"
+                  defaultChecked={true}
+                  onChange={(e) => radioChange(e)}
+                />
+                <Form.Check
+                  name="radio"
+                  type="radio"
+                  value="farmer"
+                  label="Farmer"
+                  onChange={(e) => radioChange(e)}
+                />
+              </div>
+
+              <Form.Group className="mb-3 lg-2">
                 <Form.Control
                   type="text"
                   name="username"
+                  id="username"
                   onChange={getData}
                   placeholder="Username"
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3">
                 <Form.Control
                   type="password"
                   name="password"
+                  id="password"
                   onChange={getData}
                   placeholder="Password"
                 />
