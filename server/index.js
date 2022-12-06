@@ -93,6 +93,43 @@ app.get('/Ownerlogin', (req, res) => {
   });
 });
 
+app.post('/AddProduct', (req, res) => {
+  const row = req.body;
+  const name = row.name;
+  const price = row.price;
+  const description = row.description;
+  const type = row.type;
+  const imageUrl = row.imageUrl;
+
+  const insertRow =
+    'INSERT INTO products (ProductName, ProductDesc, ProductPrice, ProductType, ImageUrl) VALUES (' +
+    JSON.stringify(name) +
+    ', ' +
+    JSON.stringify(description) +
+    ', ' +
+    JSON.stringify(price) +
+    ', ' +
+    JSON.stringify(type) +
+    ', ' +
+    JSON.stringify(imageUrl.toString()) +
+    ' )';
+
+  db.query(insertRow, [row], (err, rows) => {
+    if (err) throw err;
+  });
+});
+
+app.get('/getProducts', (req, res) => {
+  db.connect(function (err) {
+    if (err) throw err;
+    db.query('SELECT * FROM products', function (err, result, fields) {
+      if (err) throw err;
+      res.json({ data: result });
+    });
+  });
+});
+
+
 app.listen(3001, () => {
   console.log('runnig server on 3001');
 });

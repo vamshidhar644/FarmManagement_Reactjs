@@ -12,6 +12,7 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import OwnerHome from './LoginComponents/OwnerHome';
 import FarmerHome from './LoginComponents/FarmerHome';
+import AddProducts from './LoginComponents/AddProducts';
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
@@ -28,6 +29,7 @@ root.render(
 
       <Route path="/ownerHome" element={<OwnerHome />} />
       <Route path="/farmerHome" element={<FarmerHome />} />
+      <Route path="/addproduct" element={<AddProducts />} />
     </Routes>
     <Footer />
   </BrowserRouter>

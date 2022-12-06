@@ -1,0 +1,27 @@
+.AddContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.AddHeader{
+    padding: 3rem;
+}
+
+.AddBody{
+    width: 60%;
+    padding: 3rem;
+}
+
+.ProductType{
+    display: flex;
+    gap: 10px;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.AddButtons{
+    display: flex;
+    gap: 2rem;
+}

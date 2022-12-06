@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 
 const Login = () => {
   const navigate = useNavigate();
+  let [isLoggedIn, setLoggedStatus] = useState(false);
 
   const [inputVal, setInputValue] = useState({
     Name: '',
@@ -79,6 +80,7 @@ const Login = () => {
       if (status === 1) {
         alert('Login Success');
         navigate('/farmerHome');
+        setLoggedStatus(!isLoggedIn);
       } else {
         alert('Invalid Credentials');
       }
@@ -99,11 +101,14 @@ const Login = () => {
         select.checkLoginStatus = status;
         alert('Login Success');
         navigate('/ownerHome');
+        setLoggedStatus(!isLoggedIn)
       } else {
         alert('Invalid Credentials');
       }
     }
   };
+
+  // console.log(isLoggedIn);
 
   function ToRegister() {
     navigate('/register');
@@ -112,7 +117,7 @@ const Login = () => {
   return (
     <div className="LoginContainer">
       <div className="Duplicate">
-        <Navbar checkstatus={inputVal.loginstatus} />
+        <Navbar checkstatus={isLoggedIn} />
       </div>
       <div className="App">
         <div className="cover  mt-5">

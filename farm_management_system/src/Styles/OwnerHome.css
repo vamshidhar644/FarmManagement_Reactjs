@@ -1,0 +1,26 @@
+.OwnerhomeContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 7rem;
+}
+
+.OwnerhomeBody{
+    padding: 10rem;
+}
+
+.OwnerhomeBody ul{
+    display: flex;
+    gap: 60px;
+}
+
+.OwnerhomeBody ul li{
+    list-style: none;
+    background-color: rgba(14, 118, 4, 0.829);
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+}

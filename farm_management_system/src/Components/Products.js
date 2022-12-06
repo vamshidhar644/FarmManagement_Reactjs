@@ -1,17 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Styles/Service.css';
+import { useNavigate } from 'react-router';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
-export default function Services() {
-  return (
-    <div className="servicesContainer">
-      <div className="Header">
+class Products extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: [],
+    };
+    this.callAPI = this.callAPI.bind(this);
+    this.callAPI();
+  }
+  callAPI() {
+    fetch('http://localhost:3001/getProducts/')
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data);
+        this.setState({
+          list: data.data,
+        });
+      });
+  }
+  render() {
+    let tb_data = this.state.list.map((item) => {
+      return (
+        <Card border="success" style={{ width: '18rem' }} className="CardBox">
+          <Card.Header>
+            {/* <img src={require(`${item.ImageUrl}`)}/> */}
+          </Card.Header>
+          <Card.Body className="CardBody">
+            <Card.Title>{item.ProductName}</Card.Title>
+            <Card.Text>Price Rs.{item.ProductPrice}</Card.Text>
+            <Card.Text>Category: {item.ProductType}</Card.Text>
+            <Card.Text>{item.ProductDesc}</Card.Text>
+          </Card.Body>
+        </Card>
+      );
+    });
+
+    return (
+      <div className="Products-main-container">
         <h1>Our Products</h1>
+        <div className="Product-view">{tb_data}</div>
+        <br />
+        <Buttons />
       </div>
-      <div className="ServicesBody">
-        <div className="ServicesCards">
-          
-        </div>
-      </div>
+    );
+  }
+}
+export default Products;
+
+function Buttons() {
+  const navigate = useNavigate();
+  function AddProduct() {
+    navigate('/addproduct');
+  }
+  return (
+    <div>
+      <Form.Group as={Row} className="mb-4">
+        <Col sm={{ span: 10 }} className="AddButtons">
+          <Button type="submit" onClick={AddProduct}>
+            Add Products
+          </Button>
+        </Col>
+      </Form.Group>
     </div>
   );
 }

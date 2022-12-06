@@ -16,14 +16,46 @@
     height: inherit;
   }
   
-  .Home-Container h1{
+  .HomeHeader h1{
     font-size: 3.2rem;
-    margin-top: -20rem;
+    margin-top: -5rem;
     font-family: 'Carter One', cursive;
     font-weight: lighter;
   }
+
+  .HomeBody{
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 50px;
+    justify-content: center;
+  }
+
+  .SignInSignUp{
+    display: flex;
+    gap: 3rem;
+  }
+
+  .SignInSignUp h5{
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    cursor: pointer;
+    color: black;
+
+  }
+
+  .HomeBody h4{    
+    background-color: rgba(14, 118, 4, 0.829);
+    border-radius: 20px;
+    padding: 20px;
+    cursor: pointer;
+    color: white;
+  }
   
-  .Home-Container h4{
+  .HomeHeader h4{
     font-size: 30px;
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;

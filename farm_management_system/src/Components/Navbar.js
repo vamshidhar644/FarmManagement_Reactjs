@@ -1,17 +1,50 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { GiFarmTractor } from 'react-icons/gi';
+import '../Styles/Navbar.css';
 
-import MainNavbar from '../NavBars/MainNavbar';
-import LoginNavbar from '../NavBars/LoginNavbar';
+export default function Navbar({ checkstatus }) {
+  const navigate = useNavigate();
+  function ToHome() {
+    navigate('/');
+  }
+  function ToProducts() {
+    navigate('/services');
+  }
+  function ToAbout() {
+    navigate('/about');
+  }
+  function ToContact() {
+    navigate('/contact');
+  }
+  function ToLogin() {
+    navigate('/login');
+  }
+  function ToRegister() {
+    navigate('/register');
+  }
 
-export default function Navbar(props) {
+  // console.log(checkstatus);
 
-  console.log(props.checkstatus);
-  
   return (
-    <div>
-      <MainNavbar/>
-      {/* {status.checkstatus === 'MainNavbar' && <MainNavbar />} */}
-      {/* {status.checkstatus === 'LoginNavbar' && <LoginNavbar />} */}
+    <div className="navbar-container">
+      <div className="nav-item logo">
+        <GiFarmTractor />
+      </div>
+      <ul className="navi-items">
+        <li className="item" onClick={ToHome}>
+          <p>Home</p>
+        </li>
+        <li className="item" onClick={ToProducts}>
+          <p>Products</p>
+        </li>
+        <li className="item" onClick={ToAbout}>
+          <p>About</p>
+        </li>
+        <li className="item" onClick={ToContact}>
+          <p>Contact us</p>
+        </li>
+      </ul>
     </div>
   );
 }
