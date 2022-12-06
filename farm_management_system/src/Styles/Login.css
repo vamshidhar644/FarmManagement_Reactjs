@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+.Duplicate{
+    display: none;
+}
+
 .cover{
     padding: 50px;    
     border-radius: 1em;

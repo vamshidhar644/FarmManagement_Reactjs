@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import MainNavbar from '../NavBars/MainNavbar'
+import MainNavbar from '../NavBars/MainNavbar';
 import LoginNavbar from '../NavBars/LoginNavbar';
 
-export default function Navbar() {
-  
-  const [active, setActive] = useState("LoginNavbar");
-  
+export default function Navbar(props) {
 
+  console.log(props.checkstatus);
+  
   return (
     <div>
-    {active === "MainNavbar" && <MainNavbar/>}
-    {active === "LoginNavbar" && <LoginNavbar/>}
+      <MainNavbar/>
+      {/* {status.checkstatus === 'MainNavbar' && <MainNavbar />} */}
+      {/* {status.checkstatus === 'LoginNavbar' && <LoginNavbar />} */}
     </div>
   );
 }

@@ -3,16 +3,20 @@ import '../Styles/Login.css';
 import { useNavigate } from 'react-router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Navbar from './Navbar';
+
 const Login = () => {
   const navigate = useNavigate();
 
   const [inputVal, setInputValue] = useState({
+    Name: '',
     username: '',
     password: '',
+    loginstatus: 'MainNavbar',
   });
+
   const getData = (e) => {
     const { value, name } = e.target;
-
     setInputValue(() => {
       return {
         ...inputVal,
@@ -21,10 +25,9 @@ const Login = () => {
     });
   };
 
-  const [LoginStatus, setLoginStatus] = useState(false);
-
   const [select, setSelection] = useState({
     option: '',
+    checkLoginStatus: '',
   });
 
   const radioChange = (e) => {
@@ -69,18 +72,15 @@ const Login = () => {
           Username === FarmerData[index]['Username'] &&
           Password === FarmerData[index]['Password']
         ) {
+          inputVal.Name = FarmerData[index]['Name'];
           status++;
         }
       }
       if (status === 1) {
         alert('Login Success');
         navigate('/farmerHome');
-        // setLoginStatus(true);
-        // console.log(LoginStatus);
       } else {
         alert('Invalid Credentials');
-        // console.log(LoginStatus);
-        // setLoginStatus(false);
       }
     } else {
       const Username = document.getElementById('username').value;
@@ -91,19 +91,18 @@ const Login = () => {
           Username === OwnerData[index]['Username'] &&
           Password === OwnerData[index]['Password']
         ) {
+          inputVal.Name = OwnerData[index]['Name'];
           status++;
         }
       }
       if (status === 1) {
+        select.checkLoginStatus = status;
         alert('Login Success');
         navigate('/ownerHome');
-        // setLoginStatus(true);
       } else {
         alert('Invalid Credentials');
-        setLoginStatus(false);
       }
     }
-    console.log(LoginStatus);
   };
 
   function ToRegister() {
@@ -112,6 +111,9 @@ const Login = () => {
 
   return (
     <div className="LoginContainer">
+      <div className="Duplicate">
+        <Navbar checkstatus={inputVal.loginstatus} />
+      </div>
       <div className="App">
         <div className="cover  mt-5">
           <section>

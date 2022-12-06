@@ -13,7 +13,7 @@ export default function Home() {
       .then((HomeData) => setHomeData(HomeData))
       .catch(console.error);
   });
-  console.log(HomeData)
+  // console.log(HomeData)
   return (
     <div>
       {HomeData.map((homedata) => (
