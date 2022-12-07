@@ -38,9 +38,6 @@ export default function Navbar({ checkstatus }) {
         <li className="item" onClick={ToProducts}>
           <p>Products</p>
         </li>
-        <li className="item" onClick={ToAbout}>
-          <p>About</p>
-        </li>
         <li className="item" onClick={ToContact}>
           <p>Contact us</p>
         </li>

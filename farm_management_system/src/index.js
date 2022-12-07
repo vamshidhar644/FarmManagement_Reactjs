@@ -6,7 +6,6 @@ import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Home from './Components/Home';
 import Products from './Components/Products';
-import About from './Components/About';
 import Contact from './Components/Contact';
 import Login from './Components/Login';
 import Register from './Components/Register';
@@ -22,7 +21,6 @@ root.render(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/services" element={<Products />} />
-      <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

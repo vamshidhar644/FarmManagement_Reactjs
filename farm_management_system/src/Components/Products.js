@@ -34,10 +34,10 @@ class Products extends React.Component {
             {/* <img src={require(`${item.ImageUrl}`)}/> */}
           </Card.Header>
           <Card.Body className="CardBody">
-            <Card.Title>{item.ProductName}</Card.Title>
-            <Card.Text>Price Rs.{item.ProductPrice}</Card.Text>
-            <Card.Text>Category: {item.ProductType}</Card.Text>
-            <Card.Text>{item.ProductDesc}</Card.Text>
+            <Card.Title className='ProductTitle'>{item.ProductName}</Card.Title>
+            <Card.Text className='ProductPrice'>Rs.{item.ProductPrice}</Card.Text><hr/>
+            <Card.Text className='ProductCategory'>{item.ProductType}</Card.Text>
+            <Card.Text className='ProductDesc'>{item.ProductDesc}</Card.Text>
           </Card.Body>
         </Card>
       );
@@ -60,6 +60,9 @@ function Buttons() {
   function AddProduct() {
     navigate('/addproduct');
   }
+  function ToFarmerHome() {
+    navigate('/farmerHome');
+  }
   return (
     <div>
       <Form.Group as={Row} className="mb-4">
@@ -67,6 +70,9 @@ function Buttons() {
           <Button type="submit" onClick={AddProduct}>
             Add Products
           </Button>
+            <Button type="submit" onClick={ToFarmerHome}>
+              Back to Home
+            </Button>
         </Col>
       </Form.Group>
     </div>

@@ -19,3 +19,11 @@
   background-color: rgba(14, 118, 4, 0.541);
   color: white;
 }
+
+.ProductPrice{
+  font-weight: bold;
+  margin: 0;
+}
+
+.ProductCategory{
+}
