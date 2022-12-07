@@ -8,7 +8,7 @@
 
 .Product-view{
   display: flex;
-  gap: 5rem;
+  gap: 4rem;
 }
 
 .CardBox{
@@ -25,5 +25,7 @@
   margin: 0;
 }
 
-.ProductCategory{
+.ProductImage img{
+  width: 100%;
+  height: 100%;
 }

@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+// import ''
 
 class Products extends React.Component {
   constructor(props) {
@@ -26,12 +27,13 @@ class Products extends React.Component {
         });
       });
   }
+
   render() {
     let tb_data = this.state.list.map((item) => {
       return (
         <Card border="success" style={{ width: '18rem' }} className="CardBox">
-          <Card.Header>
-            {/* <img src={require(`${item.ImageUrl}`)}/> */}
+          <Card.Header className='ProductImage'>
+            <img src= {process.env.PUBLIC_URL+"/Assets/"+item.ImageUrl} alt="test" />
           </Card.Header>
           <Card.Body className="CardBody">
             <Card.Title className='ProductTitle'>{item.ProductName}</Card.Title>

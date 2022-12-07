@@ -22,14 +22,20 @@ const AddProducts = () => {
     price: '',
     description: '',
     type: '',
-    imageUrl: '',
   });
+  
+	const [selectedFile, setSelectedFile] = useState();
 
   const { name, price, description, type, imageUrl } = inputVal;
 
   const onInputChange = (e) => {
     setInputValue({ ...inputVal, [e.target.name]: e.target.value });
+    setSelectedFile(e.target.files[0].name);
+
   };
+
+
+  // console.log(selectedFile);
 
   const [select, setSelection] = useState({
     option: '',
@@ -41,7 +47,9 @@ const AddProducts = () => {
 
   // console.log(select.formHorizontalRadios);
   inputVal.type = select.formHorizontalRadios;
+  inputVal.imageUrl = selectedFile;
 
+  // console.log(inputVal.imageUrl)
   const AddProduct = (e) => {
     e.preventDefault();
 
@@ -178,7 +186,9 @@ const AddProducts = () => {
           <Col sm={10}>
             <Form.Control
               type="file"
+              id="upload"
               name="imageUrl"
+              
               onChange={(e) => onInputChange(e)}
             />
           </Col>
